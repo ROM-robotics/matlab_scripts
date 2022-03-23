@@ -3,11 +3,13 @@ clear; clc; close all;
 % Setup matlab's random number generator to act determistically
 rng('default');
 
-% Define Our uniform Distribution
-a = 2;
-b = 5;
-mu = (a+b) /2;
-sigma = sqrt( 1/12 * (a-b)^2 );  % find std of uniform distribution
+% Define Our Triangle Distribution
+a = 0; % lower limit
+b = 1; % peak value
+c = 10;% upper limit
+
+mu = (a+b+c) /2;
+sigma = sqrt( (a^2+b^2+c^2-a*b-a*c-b*c)/18 );  % find std of triangle distribution
 
 % Define number of observations per sample
 N = 400; % N = 4; 
@@ -15,13 +17,13 @@ N = 400; % N = 4;
 M = 3000; % M = 3;
 
 for m=1:M
-    % Sample N times from Uniform Distribution
-    % random will generated from a to b with N number of quantity. This is custom function wrote by Christopher Lum.
-    X = rand2(a,b,N);
+    % Sample N times from Triangle Distribution
+    pd = makedist('Triangular','a', a, 'b', b, 'c',c);
+    X = random(pd, 1, N);
     
     if(m==1)
         figure
-        hist(X)
+        hist(X,20)
     end
     % Compute Sample mean
     Sn = mean(X);
