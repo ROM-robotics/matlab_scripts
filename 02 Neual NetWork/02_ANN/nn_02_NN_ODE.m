@@ -1,4 +1,5 @@
-clear all;clc;
+%%%% ODE  %%%%
+clear; clc;
 t,y = sim("nn_02_simulink.slx");
 
 P = t';
@@ -11,4 +12,4 @@ trained_net = train(net, P, T);
 A = sim(trained_net, P);
 gensim(trained_net, 0.01);
 %}
-t
+%%%% ------------------------------------------------------------------------%%%%

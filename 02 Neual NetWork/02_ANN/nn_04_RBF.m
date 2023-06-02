@@ -1,4 +1,4 @@
-%%% RBF for function approximation
+%%%% RBF for function approximation  %%%%
 clear; clc;
 
 X = -1:0.1:10;
@@ -23,4 +23,4 @@ pred_2 = sim(net_,X);
 plot(X,Y,"-",X,pred_1,'-',X,pred_2,"-");
 legend('actual','predict_newrbe','predict_newrb');
 grid on;
-
+%%%% ------------------------------------------------------------------------%%%%
