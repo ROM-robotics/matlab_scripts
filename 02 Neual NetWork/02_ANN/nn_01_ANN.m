@@ -11,7 +11,7 @@ net = newp([-1 1;-2 2],1);
 %view(net);
 
 % default weight တန်ဖိုးနှစ်ခုက 0
-%net.IW{1,1};
+net.IW{1,1};
 net.IW{1,1}=[0.9,0.1];
 
 % default Layer weight
@@ -19,9 +19,9 @@ net.LW;
 % default bias
 net.biases;
 
-X = [1 -1 1;
+X = [1 -1 5;
      2 -2 2];
-Y = [3 -3 3];
+Y = [3 -3 7];
 % Training ( train(all) or adapt(one) )
 % [ updated_network, epoch ] 
 [net, tr] = train(net, X, Y);
@@ -29,7 +29,8 @@ Y = [3 -3 3];
 %}
 
 
-%{ %% 2 AND gate perceptron
+%{ 
+%% 2 AND gate perceptron
 X = [0 0 1 1;
      0 1 0 1];
 Y = [0 0 0 1];
@@ -42,29 +43,33 @@ y_hat = sim(trained_net, X);
 %}
 
 
-%{ %% 3 Feedforward
+%{ 
+%% 3 Feedforward
 % defalut 1 hidden with 10 neurons, 1 output
 net1 = feedforwardnet();
 % 1 Hidden layers with 8 nodes
 net2 = feedforwardnet(8);
 % 2 Hidden layers with 8 nodes and 3 nodes
 net3 = feedforwardnet([8 3]);
-view(net2);
+view(net3);
 %}
 
-%{ %% 4 Function with one variable
+%{ 
+%% 4 Function with one variable
 x = 0:0.05:2;
 y = 1./( (x-0.3).^3 + 0.1 )  + 1./( (x-0.9).^2+0.04 ) - 6;
 % plot(x,y);
+
 net = feedforwardnet([5 10]);
 net.trainParam.goal = 0.001; % performance goal
 trained_net = train(net,x,y);
 y_hat = sim(trained_net, x);
-figure(1);plot(x,y,"-",x,y_hat,'-');
+figure(1);plot(x,y,"-",x,y_hat,'o');
 legend('actual','predict');
 %}
 
-%{ %% 5 Function with two variable
+%{ 
+%% 5 Function with two variable
 x = -2:0.25:2;
 y = -2:0.25:2;
 [x1,y1] = meshgrid(x,y); % return 1x17 to 17x17
@@ -80,7 +85,8 @@ predict_output = sim(trained_net, X);
 plot(y,z,'-',y,predict_output,'o');
 %}
 
-%{  %% 6 Function with multi variable
+%{  
+%% 6 Function with multi variable
 a = rand(1,100); 
 b = rand(1,100); 
 c = rand(1,100); 
