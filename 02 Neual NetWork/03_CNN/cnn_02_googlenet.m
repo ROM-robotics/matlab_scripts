@@ -1,9 +1,7 @@
-%%%% googlene %%%%
+%%%% googlenet %%%%
 clear;clc;
-deenet = googlenet;
-img1 = imread("blabla.jpg")
-
-pred = classify(deepnet, img1)
+deepnet = googlenet;
+img1 = imread("001.jpg")
 
 ly = deepnet.Layers;
 
@@ -13,19 +11,22 @@ input_size = input_layer.InputSize;
 
 output_layer = ly(144)
 
-category_name = output_layer.Classes;
+category_names = output_layer.Classes;
+
+size(img1)
+img = imresize(img1,input_size(1:2));
 
 %% You have loaded the pretrained GoogLeNet network into MATLAB and examined its structure. 
 %% It can predict the content of a 224-by-224 color image from 1000 possible categories.
 
-[pred,scores] = classify(net, img)
+[pred,scores] = classify(deepnet, img)
 
 %% barchart
-bar(scores)
+%bar(scores)
 
 highscores = scores > 0.01;
 
 bar(scores(highscores));
 
-xticklabels(categorynames(highscores));
+xticklabels(category_names(highscores));
 %%%% ------------------------------------------------------------------------%%%%

@@ -17,8 +17,11 @@ clear; clc;
 % Regression Layer          -> regressionLayer('Name',Name) 
 
 %% CNN model for classification of flowers( daisy, dandelion, roses, sunflowers, tulips )
+
 imds = imageDatastore('C:\Users\romrobotics\Desktop\GitRepo\DB_for_matlab','IncludeSubfolders',true,'LabelSource','foldernames');
+
 [imdsTrain, imdsValidation] = splitEachLabel(imds,225,'randomized');
+
 layers = [
     imageInputLayer([28 28 3])
     convolution2dLayer(3,8,'Padding','same')

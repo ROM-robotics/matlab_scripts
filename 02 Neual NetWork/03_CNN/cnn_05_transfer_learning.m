@@ -2,18 +2,13 @@
 clear;clc;
 %% transfer learning ( In matlab use --> Layers, data, options )
 load pathToImages
-flwrds = imageDatastore(pathToImages,"IncludeSubfolders",true);
-flowernames = flwrds.Labels %% empty list
-
-flwrds = imageDatastore(pathToImages,"IncludeSubfolders",true,"LabelSource","foldernames");
-flowernames = flwrds.Labels;
+ds = imageDatastore("C:\Users\romrobotics\Desktop\GitRepo\DB_for_matlab\flower_photos", "IncludeSubfolders", true,"LabelSource", "foldernames");
+flowernames = ds.Labels;
 
 %% Train, Test split
-[flwrTrain,flwrTest] = splitEachLabel(flwrds,0.6);
-[flwrTrain,flwrTest] = splitEachLabel(flwrds,0.8,"randomized");
-
-%% take 500 sample in each category
-[flwrTrain,flwrTest] = splitEachLabel(flwrds,500);
+%[flwrTrain,flwrTest] = splitEachLabel(ds,0.6);  % by order
+%[flwrTrain,flwrTest] = splitEachLabel(ds,0.8,"randomized"); % 80% from each label for training, random
+[flwrTrain,flwrTest] = splitEachLabel(flwrds,500,"randomized"); % ( Due to Unbalance data ) take 500 photos from each label for Training, random
 
 %% get google net and replace loss-3 layer ->   loss-3 [output 5 labels (flowers types) ], output layer --> classification layer
 

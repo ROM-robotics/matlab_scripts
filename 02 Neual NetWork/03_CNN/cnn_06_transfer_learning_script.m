@@ -1,7 +1,7 @@
 %%%% TRANSFER LEANING SCRIPT %%%%
 clear; clc;
 load pathToImages
-flower_ds = imageDatastore(pathToImages,"IncludeSubfolders",true,"LabelSource","foldernames");
+flower_ds = imageDatastore("C:\Users\romrobotics\Desktop\GitRepo\DB_for_matlab\flower_photos", "IncludeSubfolders", true,"LabelSource", "foldernames");
 [trainImgs,testImgs] = splitEachLabel(flower_ds,0.6);
 resizeTrainImgs = augmentedImageDatastore([224 224],trainImgs);
 resizeTestImgs = augmentedImageDatastore([224 224],testImgs);
